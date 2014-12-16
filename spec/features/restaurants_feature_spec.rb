@@ -31,4 +31,19 @@ feature 'restaurants' do
       expect(current_path).to eq '/restaurants'
     end
   end
+
+  context 'viewing restaurants' do
+
+    before do
+      @kfc = Restaurant.create(name:'KFC')
+    end
+
+    it 'lets a user view a restaurant' do
+     visit '/restaurants'
+     click_link 'KFC'
+     expect(page).to have_content 'KFC'
+     expect(current_path).to eq "/restaurants/#{@kfc.id}"
+    end
+
+  end
 end
