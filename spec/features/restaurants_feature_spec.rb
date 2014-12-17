@@ -89,12 +89,7 @@ feature 'restaurants' do
       scenario 'prompts user to fill out a form, then displays the new restaurant' do
         visit '/restaurants'
         click_link 'Add a restaurant'
-        #error message will appear
-        fill_in 'Name', with: 'KFC'
-        click_button 'Create Restaurant'
-        #error message maybe
-        expect(page).to have_content 'KFC'
-        expect(current_path).to eq '/restaurants'
+        expect(page).to have_content("You need to sign in or sign up before continuing.")
       end
     end
 
@@ -107,10 +102,7 @@ feature 'restaurants' do
       it 'lets a user edit a restaurant' do
        visit '/restaurants'
        click_link 'Edit KFC'
-       fill_in 'Name', with: 'Kentucky Fried Chicken'
-       click_button 'Update Restaurant'
-       expect(page).to have_content 'Kentucky Fried Chicken'
-       expect(current_path).to eq '/restaurants'
+       expect(page).to have_content("You need to sign in or sign up before continuing.")
       end
 
     end
@@ -124,8 +116,7 @@ feature 'restaurants' do
       it "removes a restaurant when a user clicks a delete link" do
         visit '/restaurants'
         click_link 'Delete KFC'
-        expect(page).not_to have_content 'KFC'
-        expect(page).to have_content 'Restaurant deleted successfully'
+        expect(page).to have_content("You need to sign in or sign up before continuing.")
       end
 
     end
