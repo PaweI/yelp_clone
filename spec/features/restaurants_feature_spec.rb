@@ -1,15 +1,32 @@
 require 'rails_helper'
 
-def create_user
-  visit '/'
-  click_link 'Sign up'
-  fill_in 'user[email]', with: 'test@test.com'
-  fill_in 'user[password]', with: 'hellohello'
-  fill_in 'user[password_confirmation]', with: 'hellohello'
-  click_button 'Sign up'
+
+def user_sign_in
+  user_sign_up
+  visit('/')
+  click_link('Sign in')
+  fill_in('Email', with: 'test@test.com')
+  fill_in('Password', with: 'hellohello')
+  click_button('Log in')
+end
+
+def user_sign_up
+  visit('/')
+  click_link('Sign up')
+  fill_in('Email', with: 'test@test.com')
+  fill_in('Password', with: 'hellohello')
+  fill_in('Password confirmation', with: 'hellohello')
+  click_button('Sign up')
 end
 
 feature 'restaurants' do
+
+
+
+  before do
+    @user = User.create(email: "test@test.com", password: "hellohello", password_confirmation: "hellohello", id: 1)
+  end
+
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
       visit '/restaurants'
@@ -34,7 +51,7 @@ feature 'restaurants' do
 
     context 'creating a valid restaurant' do
       scenario 'prompts user to fill out a form, then displays the new restaurant' do
-        create_user
+        user_sign_in
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'KFC'
         click_button 'Create Restaurant'
@@ -45,7 +62,7 @@ feature 'restaurants' do
 
     context 'an invalid restaurant' do
       scenario 'does not let you submit a name that is too short' do
-        create_user
+        user_sign_in
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'kf'
@@ -55,14 +72,15 @@ feature 'restaurants' do
       end
     end
 
-    context 'editing and deleting restaurants' do
+    context 'editing and deleting restaurants that user own' do
 
       before do
-        Restaurant.create(name:'KFC')
+        @restaurant = Restaurant.create(name:'KFC', 
+                          user_id: 1)
       end
 
       it 'lets a user edit a restaurant' do
-        create_user
+        user_sign_in
         visit '/restaurants'
         click_link 'Edit KFC'
         fill_in 'Name', with: 'Kentucky Fried Chicken'
@@ -72,11 +90,34 @@ feature 'restaurants' do
       end
 
       it "removes a restaurant when a user clicks a delete link" do
-        create_user
+        user_sign_in
         visit '/restaurants'
         click_link 'Delete KFC'
         expect(page).not_to have_content 'KFC'
         expect(page).to have_content 'Restaurant deleted successfully'
+      end
+
+    end
+
+    context 'editing and deleting restaurants that user doesn\'t own' do
+
+      before do
+        Restaurant.create(name:'KFC', 
+                          user_id: 24)
+      end
+
+      it 'lets a user edit a restaurant' do
+        user_sign_in
+        visit '/restaurants'
+        click_link 'Edit KFC'
+        expect(page).to have_content 'You cannot edit this restaurant'
+      end
+
+      it "doesn't remove a restaurant when a user clicks a delete link" do
+        user_sign_in
+        visit '/restaurants'
+        click_link 'Delete KFC'
+        expect(page).to have_content 'You cannot delete this restaurant'
       end
 
     end
