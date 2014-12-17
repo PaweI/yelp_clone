@@ -1,5 +1,14 @@
 require 'rails_helper'
 
+def create_user
+  visit '/'
+  click_link 'Sign up'
+  fill_in 'user[email]', with: 'test@test.com'
+  fill_in 'user[password]', with: 'hellohello'
+  fill_in 'user[password_confirmation]', with: 'hellohello'
+  click_button 'Sign up'
+end
+
 feature 'restaurants' do
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
@@ -21,11 +30,11 @@ feature 'restaurants' do
     end
   end
 
-  feature 'creating restaurants' do
+  feature 'after logging in' do
 
-    context 'a valid restaurant' do
+    context 'creating a valid restaurant' do
       scenario 'prompts user to fill out a form, then displays the new restaurant' do
-        visit '/restaurants'
+        create_user
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'KFC'
         click_button 'Create Restaurant'
@@ -36,6 +45,7 @@ feature 'restaurants' do
 
     context 'an invalid restaurant' do
       scenario 'does not let you submit a name that is too short' do
+        create_user
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'kf'
@@ -44,6 +54,82 @@ feature 'restaurants' do
         expect(page).to have_content 'error'
       end
     end
+
+    context 'editing and deleting restaurants' do
+
+      before do
+        Restaurant.create(name:'KFC')
+      end
+
+      it 'lets a user edit a restaurant' do
+        create_user
+        visit '/restaurants'
+        click_link 'Edit KFC'
+        fill_in 'Name', with: 'Kentucky Fried Chicken'
+        click_button 'Update Restaurant'
+        expect(page).to have_content 'Kentucky Fried Chicken'
+        expect(current_path).to eq '/restaurants'
+      end
+
+      it "removes a restaurant when a user clicks a delete link" do
+        create_user
+        visit '/restaurants'
+        click_link 'Delete KFC'
+        expect(page).not_to have_content 'KFC'
+        expect(page).to have_content 'Restaurant deleted successfully'
+      end
+
+    end
+
+  end
+
+  feature 'before logging in' do
+
+    context 'creating a valid restaurant' do
+      scenario 'prompts user to fill out a form, then displays the new restaurant' do
+        visit '/restaurants'
+        click_link 'Add a restaurant'
+        #error message will appear
+        fill_in 'Name', with: 'KFC'
+        click_button 'Create Restaurant'
+        #error message maybe
+        expect(page).to have_content 'KFC'
+        expect(current_path).to eq '/restaurants'
+      end
+    end
+
+    context 'editing restaurants' do
+
+      before do
+        Restaurant.create(name:'KFC')
+      end
+
+      it 'lets a user edit a restaurant' do
+       visit '/restaurants'
+       click_link 'Edit KFC'
+       fill_in 'Name', with: 'Kentucky Fried Chicken'
+       click_button 'Update Restaurant'
+       expect(page).to have_content 'Kentucky Fried Chicken'
+       expect(current_path).to eq '/restaurants'
+      end
+
+    end
+
+    context 'deleting restaurants' do
+
+      before do
+        Restaurant.create(:name => "KFC")
+      end
+
+      it "removes a restaurant when a user clicks a delete link" do
+        visit '/restaurants'
+        click_link 'Delete KFC'
+        expect(page).not_to have_content 'KFC'
+        expect(page).to have_content 'Restaurant deleted successfully'
+      end
+
+    end
+
   end
 
   context 'viewing restaurants' do
@@ -61,36 +147,6 @@ feature 'restaurants' do
 
   end
 
-  context 'editing restaurants' do
-
-    before do
-      Restaurant.create(name:'KFC')
-    end
-
-    it 'lets a user edit a restaurant' do
-     visit '/restaurants'
-     click_link 'Edit KFC'
-     fill_in 'Name', with: 'Kentucky Fried Chicken'
-     click_button 'Update Restaurant'
-     expect(page).to have_content 'Kentucky Fried Chicken'
-     expect(current_path).to eq '/restaurants'
-    end
-
-  end
-
-  context 'deleting restaurants' do
-
-    before do
-      Restaurant.create(:name => "KFC")
-    end
-
-    it "removes a restaurant when a user clicks a delete link" do
-      visit '/restaurants'
-      click_link 'Delete KFC'
-      expect(page).not_to have_content 'KFC'
-      expect(page).to have_content 'Restaurant deleted successfully'
-    end
-
-  end
+  
 
 end
