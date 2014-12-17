@@ -3,5 +3,6 @@
   <%= f.text_area :thoughts %>
   <%= f.label :rating %>
   <%= f.select :rating, (1..5) %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.submit 'Leave Review' %>
 <% end %>

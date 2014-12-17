@@ -2,7 +2,6 @@ require 'rails_helper'
 
 
 def user_sign_in
-  user_sign_up
   visit('/')
   click_link('Sign in')
   fill_in('Email', with: 'test@test.com')
