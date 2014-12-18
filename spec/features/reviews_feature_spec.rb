@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-  def write_review
-    visit '/restaurants'
-    click_link 'Review KFC'
-    fill_in "Thoughts", with: "so so"
-    select '3', from: 'Rating'
-    click_button 'Leave Review'
-  end
+  # def write_review
+  #   visit '/restaurants'
+  #   click_link 'Review KFC'
+  #   fill_in "Thoughts", with: "so so"
+  #   select '3', from: 'Rating'
+  #   click_button 'Leave Review'
+  # end
 
   def write_review
     visit '/restaurants'
@@ -26,9 +26,9 @@ require 'rails_helper'
 
 describe 'reviewing' do
   before do
-    Restaurant.create(name: 'KFC')
+    Restaurant.create(name: 'KFC', id: 1)
     @user = User.create(email: "test@test.com", password: "hellohello", password_confirmation: "hellohello", id: 1)
-    Review.create(thoughts: "rubbish", rating: 4, restaurant_id: 1)
+    # Review.create(thoughts: "rubbish", rating: 4, restaurant_id: 1)
   end
 
 

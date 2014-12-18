@@ -3,8 +3,12 @@ class ReviewsController < ApplicationController
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
-    if @restaurant.reviews.map(&:user_id).include? current_user.id
+    if !current_user
+      flash[:alert] = 'You must be logged in to write a review.'
+      redirect_to restaurants_path
+    elsif @restaurant.reviews.map(&:user_id).include? current_user.id
       flash[:alert] = 'You have already reviewed this restaurant.'
+      redirect_to restaurants_path
     else
       @review = Review.new
     end
@@ -17,7 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:thoughts, :rating)
+    params.require(:review).permit(:thoughts, :rating, :user_id)
   end
 
 # REVIEWS ARE NOT BEING ASSIGNED USER IDS. 
