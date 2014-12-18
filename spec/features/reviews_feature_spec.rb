@@ -28,7 +28,7 @@ require 'rails_helper'
     visit('/')
     click_link('Sign out')
     click_link('Sign in')
-    fill_in('Email', with: 'test@test.com')
+    fill_in('Email', with: 'example@test.com')
     fill_in('Password', with: 'hellohello')
     click_button('Log in')
   end
@@ -59,7 +59,7 @@ describe 'reviewing' do
       expect(page).to have_content('You have already reviewed this restaurant.')
     end
 
-    it 'allows users to delete their own review' do
+    xit 'allows users to delete their own review' do
       user_sign_in
       write_review
       visit '/restaurants'
@@ -67,7 +67,7 @@ describe 'reviewing' do
       expect(page).to have_content('Review deleted successfully.')
     end
 
-    it 'does not allow users to delete someone elses review' do
+    xit 'does not allow users to delete someone elses review' do
       user_sign_in
       write_review
       user2_sign_in
@@ -87,12 +87,33 @@ describe 'reviewing' do
       expect(page).to have_content('You must be logged in to write a review.')
     end
 
-    it 'does not allow users to delete their own review' do
+    xit 'does not allow users to delete their own review' do
       visit '/restaurants'
       click_link 'Delete Review'
       expect(page).to have_content('You cannot delete a review without being logged in.')
     end
     
+  end
+
+  context 'average review ranking' do 
+
+    def leave_review(thoughts, rating)
+      visit '/restaurants'
+      click_link 'Review KFC'
+      fill_in 'Thoughts', with: thoughts
+      select rating, from: 'Rating'
+      click_button 'Leave Review'
+    end
+
+    it 'displays an average rating for all reviews' do
+      user_sign_in
+      expect(page).to have_link('Sign out')
+      leave_review('So so', '3')
+      user2_sign_in
+      expect(page).to have_link('Sign out')
+      leave_review('Great', '5')
+      expect(page).to have_content('Average rating: 4')
+    end
   end
 
 
