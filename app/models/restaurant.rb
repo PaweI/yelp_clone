@@ -1,6 +1,6 @@
 class Restaurant < ActiveRecord::Base
 
-  has_many :reviews, dependent: :destroy# check id of user created review
+  has_many :reviews, dependent: :destroy
 
   belongs_to :user
 
@@ -8,7 +8,6 @@ class Restaurant < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   validates :name, length: {minimum: 3}, uniqueness: true
-  # validates :user_id, uniqueness: true
 
 
   def average_rating
