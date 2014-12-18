@@ -1,4 +1,3 @@
-require 'byebug'
 class ReviewsController < ApplicationController
 
   def new
