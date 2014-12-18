@@ -112,7 +112,7 @@ describe 'reviewing' do
       user2_sign_in
       expect(page).to have_link('Sign out')
       leave_review('Great', '5')
-      expect(page).to have_content('Average rating: 4')
+      expect(page).to have_content('Average rating: ★★★★☆')
     end
   end
 
