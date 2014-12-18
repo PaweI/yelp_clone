@@ -67,7 +67,7 @@ describe 'reviewing' do
       expect(page).to have_content('Review deleted successfully.')
     end
 
-    it 'allows users to delete their own review' do
+    it 'does not allow users to delete someone elses review' do
       user_sign_in
       write_review
       user2_sign_in
