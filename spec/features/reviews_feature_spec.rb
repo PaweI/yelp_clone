@@ -59,7 +59,7 @@ describe 'reviewing' do
       expect(page).to have_content('You have already reviewed this restaurant.')
     end
 
-    xit 'allows users to delete their own review' do
+    it 'allows users to delete their own review' do
       user_sign_in
       write_review
       visit '/restaurants'
@@ -67,7 +67,7 @@ describe 'reviewing' do
       expect(page).to have_content('Review deleted successfully.')
     end
 
-    xit 'does not allow users to delete someone elses review' do
+    it 'does not allow users to delete someone elses review' do
       user_sign_in
       write_review
       user2_sign_in
@@ -87,8 +87,11 @@ describe 'reviewing' do
       expect(page).to have_content('You must be logged in to write a review.')
     end
 
-    xit 'does not allow users to delete their own review' do
+    it 'does not allow users to delete their own review' do
       visit '/restaurants'
+      user_sign_in
+      write_review
+      click_on 'Sign out'
       click_link 'Delete Review'
       expect(page).to have_content('You cannot delete a review without being logged in.')
     end

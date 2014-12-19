@@ -22,6 +22,21 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:thoughts, :rating, :user_id)
   end
+
+  def destroy
+    @review = Review.find(params[:id])
+    if !current_user
+      flash[:alert] = "You cannot delete a review without being logged in."
+      redirect_to restaurants_path
+    elsif current_user.id != @review.user_id
+      flash[:alert] = "You cannot delete another users review."
+      redirect_to restaurants_path
+    else
+      @review.destroy 
+      flash[:notice] = "Review deleted successfully."
+      redirect_to restaurants_path
+    end
+  end
   
 end
 
