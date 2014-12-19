@@ -22,17 +22,6 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:thoughts, :rating, :user_id)
   end
-
-# REVIEWS ARE NOT BEING ASSIGNED USER IDS. 
   
 end
 
-# (byebug) @restaurant.reviews.map(&:user_id).include? current_user.id
-# false
-# (byebug) Review.first
-#   #<Review id: 39, thoughts: "rubbish", rating: 4, created_at: "2014-12-17 19:03:21", updated_at: "2014-12-17 19:03:21", restaurant_id: 1, user_id: nil>
-# (byebug) @restaurant.id
-# 292
-# (byebug) Review.all.map &:id
-# [39]
-# (byebug) Review.all.map &:restaurant_id
