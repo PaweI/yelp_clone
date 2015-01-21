@@ -26,7 +26,7 @@ class RestaurantsController < ApplicationController
 
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :description, :user_id, :image)
+    params.require(:restaurant).permit(:name, :description, :image)
   end
 
   def edit
