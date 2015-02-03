@@ -1,6 +1,6 @@
 #Yelp Clone
 
-[![Code Climate](https://codeclimate.com/github/nickbdyer/yelp_clone/badges/gpa.svg)](https://codeclimate.com/github/nickbdyer/yelp_clone)
+[![Code Climate](https://codeclimate.com/github/nickbdyer/yelp_clone/badges/gpa.svg)](https://codeclimate.com/github/nickbdyer/yelp_clone) [![Test Coverage](https://codeclimate.com/github/nickbdyer/yelp_clone/badges/coverage.svg)](https://codeclimate.com/github/nickbdyer/yelp_clone)
 
 Week 8 at Makers Academy
 
