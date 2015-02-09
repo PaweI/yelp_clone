@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/palyrex/yelp_clone/badges/gpa.svg)](https://codeclimate.com/github/palyrex/yelp_clone)
+[![Code Climate](https://codeclimate.com/github/palyrex/yelp_clone/badges/gpa.svg)](https://codeclimate.com/github/palyrex/yelp_clone) [![Test Coverage](https://codeclimate.com/github/palyrex/yelp_clone/badges/coverage.svg)](https://codeclimate.com/github/palyrex/yelp_clone)
 
 ####Week 8 project at Makers Academy!
 

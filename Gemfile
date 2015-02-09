@@ -49,10 +49,11 @@ gem 'byebug', group: [:development, :test]
 
 
 group :test do
-  gem 'rspec-rails'
   gem 'capybara'
-  gem 'rspec-collection_matchers'
-  gem 'poltergeist'
+  gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
 end
 
