@@ -11,5 +11,4 @@ feature 'endorsing reviews' do
     click_link 'Endorse review'
     expect(page).to have_content('1 endorsement')
   end
-
 end

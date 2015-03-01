@@ -45,9 +45,13 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (0.0.8)
+      nokogiri (~> 1.6)
+      version_sorter (~> 1.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cliver (0.3.2)
     cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.4.6)
@@ -75,6 +79,7 @@ GEM
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.6)
     hashie (3.3.2)
     hike (1.2.3)
     i18n (0.6.11)
@@ -119,11 +124,6 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.17.1)
-    poltergeist (1.5.1)
-      capybara (~> 2.1)
-      cliver (~> 0.3.1)
-      multi_json (~> 1.0)
-      websocket-driver (>= 0.2.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -170,6 +170,7 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
+    rubyzip (1.1.7)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -179,6 +180,11 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (2.44.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -205,11 +211,10 @@ GEM
     uglifier (2.6.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    version_sorter (1.1.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket-driver (0.5.1)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.1)
+    websocket (1.2.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -220,6 +225,7 @@ DEPENDENCIES
   aws-sdk
   byebug
   capybara
+  chromedriver-helper
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   database_cleaner
@@ -229,13 +235,13 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg
-  poltergeist
   rails (= 4.1.8)
   rails_12factor
   rspec-collection_matchers
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   spring
   turbolinks
   uglifier (>= 1.3.0)

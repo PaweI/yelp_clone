@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-context "user not signed in and on the homepage" do
+context 'user not signed in and on the homepage' do
   it "should see a 'sign in' link and a 'sign up' link" do
     visit('/')
     expect(page).to have_link('Sign in')
@@ -13,8 +13,7 @@ context "user not signed in and on the homepage" do
   end
 end
 
-context "user signed in on the homepage" do
-
+context 'user signed in on the homepage' do
   before do
     visit('/')
     click_link('Sign up')

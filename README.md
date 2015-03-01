@@ -1,31 +1,43 @@
 [![Code Climate](https://codeclimate.com/github/palyrex/yelp_clone/badges/gpa.svg)](https://codeclimate.com/github/palyrex/yelp_clone) [![Test Coverage](https://codeclimate.com/github/palyrex/yelp_clone/badges/coverage.svg)](https://codeclimate.com/github/palyrex/yelp_clone)
 
-####Week 8 project at Makers Academy!
+#Yelp Clone
 
-####SYNOPSIS
+Week 8 at Makers Academy
 
-Yelp Clone
+###Challenge
 
+Recreate the Yelp Website for restaurant reviews. 
 
-####APPROACH
+Introduction to Rails, User Authentication and OmniAuth.
 
+###Technologies
 
-####TECHNOLOGIES:
+- Ruby
+- Rails
+- JS
+- JQuery
+- HTML
+- CSS
+- Devise Gem
+- Omniauth
+- AWS S3
+- ActiveRecord
 
+###How to Run
 
-#####PROGRAMMING CONCEPTS:
+#####Program
 
+```sh
+$ bin/rails s
+```
+#####Test Suite
 
-####HOW TO RUN
+```sh
+$ rspec 
+```
 
+###Improvements
 
-
-####CODE SNIPPET
-
-
-
-####WHAT I'VE LEARNT
-
-
-
-####FUTURE IMPROVEMENTS
+- Add CSS
+- Add negative endorsement feature
+- Add Google Map to location of restaurant

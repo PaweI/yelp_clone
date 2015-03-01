@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $('.endorsements-link').on('click', function(event){
       event.preventDefault();
 
@@ -7,6 +6,6 @@ $(document).ready(function() {
 
       $.post(this.href, function(response){
         endorsementCount.text(response.new_endorsement_count);
-    })
-  })
-})
+    });
+  });
+});

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use postgresql as the database for Active Record
@@ -47,13 +46,12 @@ gem 'paperclip'
 # gem 'debugger', group: [:development, :test]
 gem 'byebug', group: [:development, :test]
 
-
 group :test do
   gem 'capybara'
   gem 'codeclimate-test-reporter'
+  gem 'chromedriver-helper'
   gem 'database_cleaner'
-  gem 'poltergeist'
+  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
 end
-

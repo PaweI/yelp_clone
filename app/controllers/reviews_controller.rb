@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
     if !current_user
@@ -26,17 +25,15 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     if !current_user
-      flash[:alert] = "You cannot delete a review without being logged in."
+      flash[:alert] = 'You cannot delete a review without being logged in.'
       redirect_to restaurants_path
     elsif current_user.id != @review.user_id
-      flash[:alert] = "You cannot delete another users review."
+      flash[:alert] = 'You cannot delete another users review.'
       redirect_to restaurants_path
     else
-      @review.destroy 
-      flash[:notice] = "Review deleted successfully."
+      @review.destroy
+      flash[:notice] = 'Review deleted successfully.'
       redirect_to restaurants_path
     end
   end
-  
 end
-

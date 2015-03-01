@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 def user_sign_in
   visit('/')
   click_link('Sign in')
@@ -19,11 +18,8 @@ def user_sign_up
 end
 
 feature 'restaurants' do
-
-
-
   before do
-    @user = User.create(email: "test@test.com", password: "hellohello", password_confirmation: "hellohello", id: 1)
+    @user = User.create(email: 'test@test.com', password: 'hellohello', password_confirmation: 'hellohello', id: 1)
   end
 
   context 'no restaurants have been added' do
@@ -47,7 +43,6 @@ feature 'restaurants' do
   end
 
   feature 'after logging in' do
-
     context 'creating a valid restaurant' do
       scenario 'prompts user to fill out a form, then displays the new restaurant' do
         user_sign_in
@@ -72,10 +67,9 @@ feature 'restaurants' do
     end
 
     context 'editing and deleting restaurants that user own' do
-
       before do
-        @restaurant = Restaurant.create(name:'KFC', 
-                          user_id: 1)
+        @restaurant = Restaurant.create(name: 'KFC',
+                                        user_id: 1)
       end
 
       it 'lets a user edit a restaurant' do
@@ -88,20 +82,18 @@ feature 'restaurants' do
         expect(current_path).to eq '/restaurants'
       end
 
-      it "removes a restaurant when a user clicks a delete link" do
+      it 'removes a restaurant when a user clicks a delete link' do
         user_sign_in
         visit '/restaurants'
         click_link 'Delete KFC'
         expect(page).not_to have_content 'KFC'
         expect(page).to have_content 'Restaurant deleted successfully'
       end
-
     end
 
     context 'editing and deleting restaurants that user doesn\'t own' do
-
       before do
-        Restaurant.create(name:'KFC', 
+        Restaurant.create(name: 'KFC',
                           user_id: 24)
       end
 
@@ -118,66 +110,53 @@ feature 'restaurants' do
         click_link 'Delete KFC'
         expect(page).to have_content 'You cannot delete this restaurant'
       end
-
     end
-
   end
 
   feature 'before logging in' do
-
     context 'creating a valid restaurant' do
       scenario 'prompts user to fill out a form, then displays the new restaurant' do
         visit '/restaurants'
         click_link 'Add a restaurant'
-        expect(page).to have_content("You need to sign in or sign up before continuing.")
+        expect(page).to have_content('You need to sign in or sign up before continuing.')
       end
     end
 
     context 'editing restaurants' do
-
       before do
-        Restaurant.create(name:'KFC')
+        Restaurant.create(name: 'KFC')
       end
 
       it 'lets a user edit a restaurant' do
-       visit '/restaurants'
-       click_link 'Edit KFC'
-       expect(page).to have_content("You need to sign in or sign up before continuing.")
+        visit '/restaurants'
+        click_link 'Edit KFC'
+        expect(page).to have_content('You need to sign in or sign up before continuing.')
       end
-
     end
 
     context 'deleting restaurants' do
-
       before do
-        Restaurant.create(:name => "KFC")
+        Restaurant.create(name: 'KFC')
       end
 
-      it "removes a restaurant when a user clicks a delete link" do
+      it 'removes a restaurant when a user clicks a delete link' do
         visit '/restaurants'
         click_link 'Delete KFC'
-        expect(page).to have_content("You need to sign in or sign up before continuing.")
+        expect(page).to have_content('You need to sign in or sign up before continuing.')
       end
-
     end
-
   end
 
   context 'viewing restaurants' do
-
     before do
-      @kfc = Restaurant.create(name:'KFC')
+      @kfc = Restaurant.create(name: 'KFC')
     end
 
     it 'lets a user view a restaurant' do
-     visit '/restaurants'
-     click_link 'KFC'
-     expect(page).to have_content 'KFC'
-     expect(current_path).to eq "/restaurants/#{@kfc.id}"
+      visit '/restaurants'
+      click_link 'KFC'
+      expect(page).to have_content 'KFC'
+      expect(current_path).to eq "/restaurants/#{@kfc.id}"
     end
-
   end
-
-  
-
 end
