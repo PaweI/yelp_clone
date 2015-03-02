@@ -4,6 +4,8 @@
 
 Week 8 at Makers Academy
 
+Check it out at [yelp-copy.herokuapp.com](https://yelp-copy.herokuapp.com/)
+
 ###Challenge
 
 Recreate the Yelp Website for restaurant reviews. 
